@@ -1,12 +1,15 @@
 {
   "name": "@nire0510/wql",
-  "version": "1.0.0-alpha.2",
-  "description": "Query the web with SQL like sytax",
-  "main": "src/index.ts",
+  "version": "1.0.0-alpha.3",
+  "description": "Query the web with SQL like syntax",
+  "main": "build/index.js",
   "private": false,
   "scripts": {
     "build": "rm -rf build/* && tsc -p tsconfig.json",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "npm run build",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "keywords": [
     "scraper",
