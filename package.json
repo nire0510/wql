@@ -1,6 +1,6 @@
 {
   "name": "@nire0510/wql",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Query the web with SQL like sytax",
   "main": "src/index.ts",
   "private": false,
@@ -21,8 +21,7 @@
     "getv": "^1.0.6",
     "lodash": "^4.17.21",
     "node-sql-parser": "^4.6.6",
-    "puppeteer": "^19.7.5",
-    "puppeteer-core": "^19.8.3"
+    "puppeteer": "^19.7.5"
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",
