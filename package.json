@@ -1,5 +1,5 @@
 {
-  "name": "wql",
+  "name": "@nire0510/wql",
   "version": "1.0.0-alpha.0",
   "description": "Query the web with SQL like sytax",
   "main": "src/index.ts",

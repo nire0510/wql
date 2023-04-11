@@ -3,11 +3,11 @@ WQL
 Query the web with SQL like syntax
 
 ## Installation
-`npm i wql`
+`npm i @nire0510/wql`
 
 ## Usage
 ```javascript
-import wql from 'wql';
+import wql from '@nire0510/wql';
 
 const response = wql(`SELECT attr(src) FROM "https://www.google.com" WHERE selector = "img";`);
 
@@ -71,7 +71,7 @@ LIMIT 10
 ## Examples
 
 ```javascript
-import wql from 'wql';
+import wql from '@nire0510/wql';
 
 // Get all images URL:
 const response = wql(`SELECT attr(src) FROM "https://www.google.com" WHERE selector = "img";`);
