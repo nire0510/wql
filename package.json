@@ -1,8 +1,9 @@
 {
   "name": "@nire0510/wql",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Query the web with SQL like sytax",
   "main": "src/index.ts",
+  "private": false,
   "scripts": {
     "build": "rm -rf build/* && tsc -p tsconfig.json",
     "test": "jest"
@@ -14,7 +15,8 @@
     "query"
   ],
   "author": "Nir Elbaz",
-  "license": "ISC",
+  "license": "MIT",
+  "readme": "README.md",
   "dependencies": {
     "getv": "^1.0.6",
     "lodash": "^4.17.21",
