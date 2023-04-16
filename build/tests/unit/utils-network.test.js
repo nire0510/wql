@@ -22,26 +22,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const netUtils = __importStar(require("../../src/utils/network"));
 describe('Network Utility', () => {
-    test('getIpAddress - should return the right IP address of a hostname', () => __awaiter(void 0, void 0, void 0, function* () {
-        const ip = yield netUtils.getIpAddress('www.example.com');
+    test('getIpAddress - should return the right IP address of a hostname', async () => {
+        const ip = await netUtils.getIpAddress('www.example.com');
         expect(ip).toBe('93.184.216.34');
-    }));
-    test('isUrlExists - should return true if URL does exists', () => __awaiter(void 0, void 0, void 0, function* () {
-        const exampleExists = yield netUtils.isUrlExists('https://www.example.com');
-        const dummyExists = yield netUtils.isUrlExists('https://www.1q2w3eewq123.com');
+    });
+    test('isUrlExists - should return true if URL does exists', async () => {
+        const exampleExists = await netUtils.isUrlExists('https://www.example.com');
+        const dummyExists = await netUtils.isUrlExists('https://www.1q2w3eewq123.com');
         expect(exampleExists).toBeTruthy();
         expect(dummyExists).toBeFalsy();
-    }));
+    });
 });
