@@ -62,9 +62,6 @@ function postValidate(properties, where) {
     if (specialPresetsInUse.length === 1 && where.selectors.length > 0) {
         throw new Error('Special presets and selectors are not supported together');
     }
-    if (where.selectors.length > 1) {
-        throw new Error('Only one selector is supported');
-    }
     return true;
 }
 exports.postValidate = postValidate;

@@ -10,15 +10,17 @@ Query the web with SQL like syntax
 import wql from '@nire0510/wql';
 // or: const wql = require('@nire0510/wql').default;
 
-const response = wql(`SELECT attr(src) FROM "https://www.google.com" WHERE selector = "img";`/*, options */);
+(async () => {
+  const response = await wql(`SELECT attr(src) FROM "https://www.google.com" WHERE selector = "img";`/*, options */);
 
-console.log(JSON.stringify(response, null, 2));
+  console.log(JSON.stringify(response, null, 2));
+})();
 ```
 
 ## Options
 You can send an options object to the `wql` functions. None of its properties is mandatory:
 ```javascript
-const response = wql(`SELECT text FROM "https://www.google.com";`, {
+const response = await wql(`SELECT text FROM "https://www.google.com";`, {
   headless: true            /* BOOLEAN (default true): Indicates whether it should run in headless mode (hidden browser) */,
   turbo: false              /* BOOLEAN (default false): Indicates whether it should run in turbo mode (avoids image, stylesheets & fonts download) */,
   screenshot: false         /* BOOLEAN (default false): Indicates whether a screenshot should be taken */,
@@ -92,9 +94,13 @@ LIMIT 10
 import wql from '@nire0510/wql';
 // or: const wql = require('@nire0510/wql').default;
 
-// Get all images URL:
-const response = wql(`SELECT attr(src) FROM "https://www.google.com" WHERE selector = "img";`);
+(async () => {
+  // Get all images URL:
+  const images = await wql(`SELECT attr(src) FROM "https://www.google.com" WHERE selector = "img";`);
+  // Get all headers font-size, sorted by descending size:
+  const headers = await wql(`SELECT style(fontSize) AS fontSize FROM "https://www.google.com" WHERE selector IN ("h1", "h2", "h3", "h4", "h5", "h6") ORDER by fontSize DESC;`);
 
-// Get all headers font-size, sorted by descending size:
-const response = wql(`SELECT style(fontSize) AS fontSize FROM "https://www.google.com" WHERE selector IN ("h1", "h2", "h3", "h4", "h5", "h6") ORDER by fontSize DESC;`);
+  console.log(images);
+  console.log(headers);
+})();
 ```
