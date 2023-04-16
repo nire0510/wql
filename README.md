@@ -8,7 +8,7 @@ Query the web with SQL like syntax
 ## Usage
 ```javascript
 import wql from '@nire0510/wql';
-// or: const wql = require('@nire0510/wql').default;
+// or: const wql = require('@nire0510/wql');
 
 (async () => {
   const response = await wql(`SELECT attr(src) FROM "https://www.google.com" WHERE selector = "img";`/*, options */);
@@ -92,7 +92,7 @@ LIMIT 10
 
 ```javascript
 import wql from '@nire0510/wql';
-// or: const wql = require('@nire0510/wql').default;
+// or: const wql = require('@nire0510/wql');
 
 (async () => {
   // Get all images URL:
