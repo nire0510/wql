@@ -17,6 +17,16 @@ import wql from '@nire0510/wql';
 })();
 ```
 
+### Running on Linux Server
+1. Install Chromium browser:  
+   `sudo apt-get install chromium-browser`
+1. Add the `executablePath` options parameter:  
+   ```
+   const response = await wql('SELECT ...', {
+     executablePath: '/usr/bin/chromium-browser',
+   };
+   ```
+
 ## Options
 You can send an options object to the `wql` functions. None of its properties is mandatory:
 ```javascript
