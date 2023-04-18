@@ -19,7 +19,7 @@ function getIpAddress(hostname) {
 }
 exports.getIpAddress = getIpAddress;
 function isUrlExists(url) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve /*, reject */) => {
         https_1.default
             .request(url, { method: 'HEAD' }, (res) => {
             if (res && res.statusCode && res.statusCode >= 200 && res.statusCode < 400) {

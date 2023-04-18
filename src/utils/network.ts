@@ -15,7 +15,7 @@ export function getIpAddress(hostname: string): Promise<string> {
 }
 
 export function isUrlExists(url: string): Promise<boolean> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve/*, reject */) => {
     https
       .request(url, { method: 'HEAD' }, (res) => {
         if (res && res.statusCode && res.statusCode >= 200 && res.statusCode < 400) {

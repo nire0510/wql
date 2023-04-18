@@ -9,11 +9,13 @@ async function load(url, options) {
         const browser = new browser_1.default(options);
         const waitPreset = ['load', 'domcontentloaded', 'networkidle0', 'networkidle2'].some((preset) => preset === options.wait);
         await browser.goto(url, {
-            waitUntil: waitPreset && options.wait || 'networkidle2',
+            waitUntil: waitPreset ? options.wait : 'networkidle2',
         });
-        !waitPreset && options.wait && await browser.waitForSelector(options.wait, {
-            visible: true,
-        });
+        if (!waitPreset && options.wait) {
+            await browser.waitForSelector(options.wait, {
+                visible: true,
+            });
+        }
         return browser;
     }
     catch (error) {

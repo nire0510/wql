@@ -20,8 +20,6 @@ describe('Browser Service', () => {
     test('should extract h1 content using getContent', async () => {
         expect((await browser.getContent('h1'))[0]).toBe('Example Domain');
     });
-    // test('should extract h1 data attribute using getData', async () => {
-    // });
     test('should extract h1 markaup using getHtml', async () => {
         expect((await browser.getHtml('h1'))[0]).toBe('<h1>Example Domain</h1>');
     });
