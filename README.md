@@ -11,7 +11,7 @@ import wql from '@nire0510/wql';
 // or: const wql = require('@nire0510/wql');
 
 (async () => {
-  const response = await wql(`SELECT attr(src) FROM "https://www.google.com" WHERE selector = "img";`/*, options */);
+  const response = await wql(`SELECT attr("src") FROM "https://www.google.com" WHERE selector = "img";`/*, options */);
 
   console.log(JSON.stringify(response, null, 2));
 })();
@@ -48,23 +48,25 @@ const response = await wql(`SELECT text FROM "https://www.google.com";`, {
 ``` sql
 SELECT [DISTINCT] property [AS alias]
   [, property [AS alias], ...]
-FROM url
-  [, url, ...]
+FROM "url"
+  [, "url", ...]
 [WHERE condition
   [AND|OR condition, ...]]
 [ORDER BY property [DESC]
   [, property [DESC], ...]]
 [LIMIT max_rows];
 ```
+* URLs in the `FROM` clause must be wrapped in parentheses, e.g. "https://www.google.com".
+* Method arguments (i.e. attr, data & style) must be wrapped in parentheses, e.g. attr("id").
 
 ### SELECT
 ``` sql
 SELECT text,                  -- text content
   html,                       -- outer HTML
   tag,                        -- tag name
-  data(fullname) AS fullname, -- dataset attribute value
-  attr(id) AS id,             -- attribute value
-  style(fontSize) AS fontSize -- style property value
+  data("fullname") AS fullname, -- dataset attribute value
+  attr("id") AS id,             -- attribute value
+  style("fontSize") AS fontSize -- style property value
 ```
 
 ### FROM
@@ -80,11 +82,11 @@ WHERE selector = ".article p"
 WHERE text != 'test'
 WHERE text LIKE '%test'
 WHERE text LIKE '%test%'
-WHERE attr(id) LIKE 'test%'
-WHERE width <= 10
-WHERE width > 10 AND width < 15
-WHERE width BETWEEN 10 AND 15
-WHERE width IN (1, 2, 3)
+WHERE attr("id") LIKE 'test%'
+WHERE width <= "10px"
+WHERE width > "10px" AND width < "15px"
+WHERE width BETWEEN "10px" AND "15px"
+WHERE width IN ("10px", "20px", "30px")
 ```
 
 ### ORDER BY
@@ -106,9 +108,9 @@ import wql from '@nire0510/wql';
 
 (async () => {
   // Get all images URL:
-  const images = await wql(`SELECT attr(src) FROM "https://www.google.com" WHERE selector = "img";`);
+  const images = await wql(`SELECT attr("src") FROM "https://www.google.com" WHERE selector = "img";`);
   // Get all headers font-size, sorted by descending size:
-  const headers = await wql(`SELECT style(fontSize) AS fontSize FROM "https://www.google.com" WHERE selector IN ("h1", "h2", "h3", "h4", "h5", "h6") ORDER by fontSize DESC;`);
+  const headers = await wql(`SELECT style("fontSize") AS fontSize FROM "https://www.google.com" WHERE selector IN ("h1", "h2", "h3", "h4", "h5", "h6") ORDER by fontSize DESC;`);
 
   console.log(images);
   console.log(headers);
