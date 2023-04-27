@@ -59,7 +59,7 @@ class Browser {
                     height: 720,
                     width: 1080,
                 }),
-                headless: (0, getv_1.default)(this.options, 'headless', true),
+                headless: (0, getv_1.default)(this.options, 'headless', 'new'),
                 userDataDir: (0, getv_1.default)(this.options, 'userDataDir', undefined),
                 executablePath: (0, getv_1.default)(this.options, 'executablePath', undefined),
             });
