@@ -62,7 +62,7 @@ export default class Browser {
           width: 1080,
         }),
 
-        headless: getv(this.options, 'headless', true),
+        headless: getv(this.options, 'headless', 'new'),
         userDataDir: getv(this.options, 'userDataDir', undefined),
         executablePath: getv(this.options, 'executablePath', undefined),
       });

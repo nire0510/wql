@@ -57,7 +57,7 @@ FROM "url"
 [LIMIT max_rows];
 ```
 * URLs in the `FROM` clause must be wrapped in parentheses, e.g. "https://www.google.com".
-* Method arguments (i.e. attr, data & style) must be wrapped in parentheses, e.g. attr("id").
+* Method arguments (i.e. `attr`, `data` & `style`) must be wrapped in parentheses, e.g. `attr("id")`.
 
 ### SELECT
 ``` sql

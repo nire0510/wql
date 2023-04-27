@@ -1,5 +1,5 @@
 interface Options {
-  headless?: boolean;
+  headless?: boolean | string;
   turbo?: boolean;
   screenshot?: string;
   userDataDir?: string;
