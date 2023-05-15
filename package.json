@@ -2,7 +2,7 @@
   "name": "@nire0510/wql",
   "version": "1.0.6",
   "description": "Query the web with SQL like syntax",
-  "main": "build/index.js",
+  "main": "build/src/index.js",
   "private": false,
   "scripts": {
     "build": "rm -rf build/* && tsc -p tsconfig.json",
