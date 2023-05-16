@@ -17,6 +17,15 @@ function preValidate(ast, query) {
                 case 'orderby':
                 case 'union':
                 case 'where':
+                case '_next':
+                    // all good
+                    break;
+                case 'set_op':
+                    if (astObject.set_op !== 'union') {
+                        validation.valid = false;
+                        validation.message.push('Only UNION is supported');
+                    }
+                    break;
                 case 'from':
                     if (!astObject.from) {
                         validation.valid = false;
