@@ -14,8 +14,8 @@ function astObjectToQuery(astObject: any): Query[] {
     const queries: Query[] = [];
 
     astObject.from.forEach((astObjectFrom: any) => {
-      const { from, ...astObjectExceptfrom } = astObject;
-      astObjectExceptfrom.from = [astObjectFrom];
+      const { from, set_op, _next, ...astObjectCleaned } = astObject;
+      astObjectCleaned.from = [astObjectFrom];
       const website = new Website(astObjectFrom.table, astObjectFrom.as);
       const properties = getv(astObject, 'columns', [{ expr: { type: 'string', value: '*' } }]).map(
         (column: any) => new Property(column)
@@ -25,7 +25,7 @@ function astObjectToQuery(astObject: any): Query[] {
 
       if (validator.postValidate(properties, where)) {
         const query = new Query(
-          parser.sqlify(astObjectExceptfrom),
+          parser.sqlify(astObjectCleaned),
           website,
           properties,
           where,
@@ -38,8 +38,8 @@ function astObjectToQuery(astObject: any): Query[] {
       }
     });
 
-    if (astObject.union && astObject._next) {
-      return queries.concat(astObjectToQuery(astObject._next));
+    if (astObject.set_op && astObject.set_op === 'union' && astObject._next) {
+      queries.push(...astObjectToQuery(astObject._next));
     }
 
     return queries;

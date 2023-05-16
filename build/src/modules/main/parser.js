@@ -50,19 +50,19 @@ function astObjectToQuery(astObject) {
     try {
         const queries = [];
         astObject.from.forEach((astObjectFrom) => {
-            const { from } = astObject, astObjectExceptfrom = __rest(astObject, ["from"]);
-            astObjectExceptfrom.from = [astObjectFrom];
+            const { from, set_op, _next } = astObject, astObjectCleaned = __rest(astObject, ["from", "set_op", "_next"]);
+            astObjectCleaned.from = [astObjectFrom];
             const website = new website_1.default(astObjectFrom.table, astObjectFrom.as);
             const properties = (0, getv_1.default)(astObject, 'columns', [{ expr: { type: 'string', value: '*' } }]).map((column) => new property_1.default(column));
             const where = new where_1.default(astObject.where);
             const order = ((0, getv_1.default)(astObject, 'orderby', []) || []).map((order) => new order_1.default(order));
             if (validator.postValidate(properties, where)) {
-                const query = new query_1.default(parser.sqlify(astObjectExceptfrom), website, properties, where, order, astObject.distinct, (0, getv_1.default)(astObject, 'limit.value.0.value'));
+                const query = new query_1.default(parser.sqlify(astObjectCleaned), website, properties, where, order, astObject.distinct, (0, getv_1.default)(astObject, 'limit.value.0.value'));
                 queries.push(query);
             }
         });
-        if (astObject.union && astObject._next) {
-            return queries.concat(astObjectToQuery(astObject._next));
+        if (astObject.set_op && astObject.set_op === 'union' && astObject._next) {
+            queries.push(...astObjectToQuery(astObject._next));
         }
         return queries;
     }
