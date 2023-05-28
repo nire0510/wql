@@ -31,16 +31,16 @@ import wql from '@nire0510/wql';
 You can send an options object to the `wql` functions. None of its properties is mandatory:
 ```javascript
 const response = await wql(`SELECT text FROM "https://www.google.com";`, {
-  headless: true            /* BOOLEAN (default true): Indicates whether it should run in headless mode (hidden browser) */,
-  turbo: false              /* BOOLEAN (default false): Indicates whether it should run in turbo mode (avoids image, stylesheets & fonts download) */,
-  screenshot: false         /* BOOLEAN (default false): Indicates whether a screenshot should be taken */,
-  userDataDir: string       /* STRING: Path to a User Data Directory */,
-  executablePath: string    /* STRING: Path to a browser executable to run instead of the bundled Chromium */,
+  headless: boolean,            /* BOOLEAN (default true): Indicates whether it should run in headless mode (hidden browser) */
+  turbo: boolean,               /* BOOLEAN (default false): Indicates whether it should run in turbo mode (avoids image, stylesheets & fonts download) */
+  screenshot: boolean,          /* BOOLEAN (default false): Indicates whether a screenshot should be taken */
+  userDataDir: string,          /* STRING: Path to a User Data Directory */
+  executablePath: string,       /* STRING: Path to a browser executable to run instead of the bundled Chromium */
   viewport: {
-    height: 600             /* NUMBER (default 720): Page height in pixels */,
-    width: 1000             /* NUMBER (default 1080): Page width in pixels */,
+    height: number,             /* NUMBER (default 720): Page height in pixels */
+    width: boolean,             /* NUMBER (default 1080): Page width in pixels */
   },
-  wait: options.wait        /* STRING (default 'networkidle2'. Options: 'domcontentloaded', 'networkidle0', 'networkidle2', selector): The event to wait for before running the query */,
+  wait: string,                 /* STRING (default 'networkidle2'. Options: 'domcontentloaded', 'networkidle0', 'networkidle2', selector): The event to wait for before running the query */,
 };
 ```
 
