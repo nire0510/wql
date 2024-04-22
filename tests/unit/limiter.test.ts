@@ -1,4 +1,4 @@
-import limit from '../../src/modules/main/limiter';
+import limit from '../../src/modules/query/limiter';
 
 describe('Limiter', () => {
   test('should return the same number of elements if limit is not specified', async () => {

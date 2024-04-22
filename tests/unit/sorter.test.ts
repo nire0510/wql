@@ -1,5 +1,5 @@
 import Order from '../../src/models/order';
-import order from '../../src/modules/main/sorter';
+import order from '../../src/modules/query/sorter';
 
 describe('Sorter', () => {
   test('should return the array with no change in elements order if order is not required', async () => {

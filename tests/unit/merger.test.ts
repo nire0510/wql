@@ -1,4 +1,4 @@
-import distinct from '../../src/modules/main/merger';
+import distinct from '../../src/modules/query/merger';
 
 describe('Merger', () => {
   test('should return the same number of elements merger is not applied', async () => {

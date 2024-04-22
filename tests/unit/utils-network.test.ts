@@ -4,7 +4,7 @@ describe('Network Utility', () => {
   test('getIpAddress - should return the right IP address of a hostname', async () => {
     const ip = await netUtils.getIpAddress('www.example.com');
 
-    expect(ip).toBe('93.184.216.34');
+    expect(ip).toBe('93.184.215.14');
   });
 
   test('isUrlExists - should return true if URL does exists', async () => {
