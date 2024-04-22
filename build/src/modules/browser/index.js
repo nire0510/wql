@@ -4,7 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const getv_1 = __importDefault(require("getv"));
-const puppeteer_1 = __importDefault(require("puppeteer"));
+const puppeteer_extra_1 = __importDefault(require("puppeteer-extra"));
+const puppeteer_extra_plugin_stealth_1 = __importDefault(require("puppeteer-extra-plugin-stealth"));
+const puppeteer_extra_plugin_adblocker_1 = __importDefault(require("puppeteer-extra-plugin-adblocker"));
+puppeteer_extra_1.default.use((0, puppeteer_extra_plugin_stealth_1.default)());
+puppeteer_extra_1.default.use((0, puppeteer_extra_plugin_adblocker_1.default)({ blockTrackers: true }));
 class Browser {
     constructor(options) {
         this.initialized = false;
@@ -46,20 +50,20 @@ class Browser {
                 // '--no-default-browser-check',
                 // '--no-first-run',
                 // '--no-pings',
-                // '--no-sandbox',
+                '--no-sandbox',
                 // '--no-zygote',
                 // '--password-store=basic',
                 // '--use-gl=swiftshader',
                 // '--use-mock-keychain',
-                '--profile-directory=Default',
+                // '--profile-directory=Default',
             ];
-            this.browser = await puppeteer_1.default.launch({
+            this.browser = await puppeteer_extra_1.default.launch({
                 // args,
                 defaultViewport: (0, getv_1.default)(this.options, 'viewport', {
                     height: 720,
                     width: 1080,
                 }),
-                headless: (0, getv_1.default)(this.options, 'headless', 'new'),
+                headless: (0, getv_1.default)(this.options, 'headless', true),
                 userDataDir: (0, getv_1.default)(this.options, 'userDataDir', undefined),
                 executablePath: (0, getv_1.default)(this.options, 'executablePath', undefined),
             });

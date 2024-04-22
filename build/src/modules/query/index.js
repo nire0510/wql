@@ -27,16 +27,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const lodash_1 = __importDefault(require("lodash"));
-const merger_1 = __importDefault(require("./merger"));
 const extractor_1 = __importDefault(require("./extractor"));
+const filter_1 = __importDefault(require("./filter"));
 const fsUtils = __importStar(require("../../utils/fs"));
 const limiter_1 = __importDefault(require("./limiter"));
 const loader_1 = __importDefault(require("./loader"));
+const merger_1 = __importDefault(require("./merger"));
 const netUtils = __importStar(require("../../utils/network"));
-const sorter_1 = __importDefault(require("./sorter"));
 const parser_1 = __importDefault(require("./parser"));
 const response_1 = __importDefault(require("../../models/response"));
-const filter_1 = __importDefault(require("./filter"));
+const sorter_1 = __importDefault(require("./sorter"));
 async function run(query, options) {
     try {
         const queries = (0, parser_1.default)(query);

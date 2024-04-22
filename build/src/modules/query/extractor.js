@@ -51,13 +51,15 @@ async function extract(browser, query) {
                                         .join('');
                                 break;
                             case 'tables':
-                                const columns = Array.from(element.querySelectorAll('thead th, thead td, tr:first-child > th, tr:first-child > td')).map((th) => th.textContent || '');
-                                value = Array.from(element.querySelectorAll('tr'))
-                                    .filter((tr, index) => index > 1 || columns.length === 0)
-                                    .map((tr) => {
-                                    const row = {};
-                                    Array.from(tr.querySelectorAll('td, th')).forEach((td, index) => (row[(columns && columns[index]) || `col${index}`] = td.textContent));
-                                    return row;
+                                value = Array.from(element.querySelectorAll('table')).map((table) => {
+                                    const columns = Array.from(table.querySelectorAll('thead th, thead td, tr:first-child > th, tr:first-child > td')).map((th) => th.textContent || '');
+                                    return Array.from(element.querySelectorAll('tr'))
+                                        .filter((tr, index) => index > 1 || columns.length === 0)
+                                        .map((tr) => Array.from(tr.querySelectorAll('td, th'))
+                                        .reduce((row, td, index) => {
+                                        (row[(columns && columns[index]) || `col${index}`] = td.textContent);
+                                        return row;
+                                    }, {}));
                                 });
                                 break;
                             case 'tag':

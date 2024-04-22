@@ -55,21 +55,18 @@ export default async function extract(browser: Browser, query: Query): Promise<K
                   .join('');
                 break;
               case 'tables':
-                const columns = Array.from(
-                  element.querySelectorAll('thead th, thead td, tr:first-child > th, tr:first-child > td')
-                ).map((th: any) => th.textContent || '');
+                value = Array.from(element.querySelectorAll('table')).map((table: any) => {
+                  const columns = Array.from(table.querySelectorAll('thead th, thead td, tr:first-child > th, tr:first-child > td')).map((th: any) => th.textContent || '');
+  
+                  return Array.from(element.querySelectorAll('tr'))
+                    .filter((tr, index) => index > 1 || columns.length === 0)
+                    .map((tr: any) => Array.from(tr.querySelectorAll('td, th'))
+                        .reduce((row: any, td: any, index) => {
+                          (row[(columns && columns[index]) || `col${index}`] = td.textContent);
 
-                value = Array.from(element.querySelectorAll('tr'))
-                  .filter((tr, index) => index > 1 || columns.length === 0)
-                  .map((tr: any) => {
-                    const row: { [key: string]: any } = {};
-
-                    Array.from(tr.querySelectorAll('td, th')).forEach(
-                      (td: any, index) => (row[(columns && columns[index]) || `col${index}`] = td.textContent)
-                    );
-
-                    return row;
-                  });
+                          return row;
+                        }, {}));
+                });
                 break;
               case 'tag':
                 value = (element as Element).tagName;

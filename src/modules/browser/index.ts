@@ -1,5 +1,11 @@
 import getv from 'getv';
-import puppeteer, { ElementHandle, Browser as PuppeteerBrowser, Page, HTTPResponse, EvaluateFunc, Protocol, NodeFor } from 'puppeteer';
+import { ElementHandle, Browser as PuppeteerBrowser, Page, HTTPResponse, EvaluateFunc, NodeFor, Cookie } from 'puppeteer';
+import puppeteer from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+import AdblockerPlugin from 'puppeteer-extra-plugin-adblocker';
+
+puppeteer.use(StealthPlugin())
+puppeteer.use(AdblockerPlugin({ blockTrackers: true }))
 
 export default class Browser {
   browser: PuppeteerBrowser | null;
@@ -47,12 +53,12 @@ export default class Browser {
         // '--no-default-browser-check',
         // '--no-first-run',
         // '--no-pings',
-        // '--no-sandbox',
+        '--no-sandbox',
         // '--no-zygote',
         // '--password-store=basic',
         // '--use-gl=swiftshader',
         // '--use-mock-keychain',
-        '--profile-directory=Default',
+        // '--profile-directory=Default',
       ];
 
       this.browser = await puppeteer.launch({
@@ -61,7 +67,7 @@ export default class Browser {
           height: 720,
           width: 1080,
         }),
-        headless: getv(this.options, 'headless', 'new'),
+        headless: getv(this.options, 'headless', true),
         userDataDir: getv(this.options, 'userDataDir', undefined),
         executablePath: getv(this.options, 'executablePath', undefined),
       });
@@ -117,7 +123,7 @@ export default class Browser {
     return this.page!.$$eval(selector, (elements: Element[]) => elements.map((element: Element) => element.textContent));
   }
 
-  getCookies(): Promise<Protocol.Network.Cookie[]> {
+  getCookies(): Promise<Cookie[]> {
     return this.page!.cookies();
   }
 

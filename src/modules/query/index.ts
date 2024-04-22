@@ -1,15 +1,15 @@
 import _ from 'lodash';
-import distinct from './merger';
 import extract from './extractor';
+import where from './filter';
 import * as fsUtils from '../../utils/fs';
 import limit from './limiter';
 import load from './loader';
+import distinct from './merger';
 import * as netUtils from '../../utils/network';
-import order from './sorter';
 import parse from './parser';
 import Query from '../../models/query';
 import Response from '../../models/response';
-import where from './filter';
+import order from './sorter';
 
 export default async function run(query: string, options: Options): Promise<Response[]> {
   try {
