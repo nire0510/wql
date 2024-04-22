@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import pick from 'lodash.pick';
 import extract from './extractor';
 import where from './filter';
 import * as fsUtils from '../../utils/fs';
@@ -29,7 +29,7 @@ export default async function run(query: string, options: Options): Promise<Resp
         const dataDistinct = distinct(dataOrdered, query.distinct);
         const dataLimited = limit(dataDistinct, query.limit);
         const properties = query.properties.map((property) => property.alias || property.name);
-        const dataFinal = dataLimited.map((row) => _.pick(row, ...properties));
+        const dataFinal = dataLimited.map((row) => pick(row, ...properties));
         const response = new Response(
           {
             userAgent,
