@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const lodash_1 = __importDefault(require("lodash"));
+const lodash_pick_1 = __importDefault(require("lodash.pick"));
 const extractor_1 = __importDefault(require("./extractor"));
 const filter_1 = __importDefault(require("./filter"));
 const fsUtils = __importStar(require("../../utils/fs"));
@@ -54,7 +54,7 @@ async function run(query, options) {
             const dataDistinct = (0, merger_1.default)(dataOrdered, query.distinct);
             const dataLimited = (0, limiter_1.default)(dataDistinct, query.limit);
             const properties = query.properties.map((property) => property.alias || property.name);
-            const dataFinal = dataLimited.map((row) => lodash_1.default.pick(row, ...properties));
+            const dataFinal = dataLimited.map((row) => (0, lodash_pick_1.default)(row, ...properties));
             const response = new response_1.default(Object.assign({ userAgent }, options), {
                 url: query.website.url,
                 ip: ipAddress,
