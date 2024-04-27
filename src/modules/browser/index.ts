@@ -45,7 +45,7 @@ export default class Browser {
         // '--disable-setuid-sandbox',
         // '--disable-speech-api',
         // '--disable-sync',
-        '--enable-automation',
+        // '--enable-automation',
         // '--hide-scrollbars',
         // '--ignore-gpu-blacklist',
         // '--metrics-recording-only',
@@ -62,7 +62,7 @@ export default class Browser {
       ];
 
       this.browser = await puppeteer.launch({
-        // args,
+        args,
         defaultViewport: getv(this.options, 'viewport', {
           height: 720,
           width: 1080,
