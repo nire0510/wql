@@ -16,7 +16,7 @@ async function extract(browser, query) {
                             case 'data':
                                 value = element.dataset[property.args[0].value];
                                 break;
-                            case 'position':
+                            case 'rect':
                                 value = element.getBoundingClientRect()[property.args[0].value];
                                 break;
                             case 'style':

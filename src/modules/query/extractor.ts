@@ -20,7 +20,7 @@ export default async function extract(browser: Browser, query: Query): Promise<K
               case 'data':
                 value = (element as HTMLElement).dataset[property.args![0].value];
                 break;
-              case 'position':
+              case 'rect':
                 value = (element as any).getBoundingClientRect()[property.args![0].value];
                 break;
               case 'style':

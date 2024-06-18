@@ -66,7 +66,7 @@ SELECT text,                    -- text content
   tag,                          -- tag name
   data("fullname") AS fullname, -- dataset attribute value
   attr("id") AS id,             -- attribute value
-  position("top") AS top,       -- element position (check getBoundingClientRect for options)
+  rect("top") AS top,           -- element rectangle (check getBoundingClientRect for options)
   style("fontSize") AS fontSize -- style property value
 ```
 
