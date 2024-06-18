@@ -60,7 +60,8 @@ export default async function run(query: string, options: Options): Promise<Resp
     );
 
     return responses;
-  } catch (error) {
+  }
+  catch (error) {
     throw new Error(`Unable to run query: ${error}`);
   }
 }

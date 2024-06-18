@@ -16,6 +16,9 @@ async function extract(browser, query) {
                             case 'data':
                                 value = element.dataset[property.args[0].value];
                                 break;
+                            case 'position':
+                                value = element.getBoundingClientRect()[property.args[0].value];
+                                break;
                             case 'style':
                                 const propertyValue = property
                                     .args[0].value.replace(/([a-z\d])([A-Z])/g, '$1-$2')

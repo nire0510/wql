@@ -14,6 +14,8 @@ export default class Argument {
         this.args = getv(astArgsValue, 'args.value', []).map((arg: any) => new Argument(arg));
         break;
       case 'string':
+      case 'double_quote_string':
+      case 'single_quote_string':
         this.value = astArgsValue.value;
         break;
       default:

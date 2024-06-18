@@ -20,6 +20,9 @@ export default async function extract(browser: Browser, query: Query): Promise<K
               case 'data':
                 value = (element as HTMLElement).dataset[property.args![0].value];
                 break;
+              case 'position':
+                value = (element as any).getBoundingClientRect()[property.args![0].value];
+                break;
               case 'style':
                 const propertyValue = property
                   .args![0].value.replace(/([a-z\d])([A-Z])/g, '$1-$2')
