@@ -85,16 +85,16 @@ WHERE text != 'test'
 WHERE text LIKE '%test'
 WHERE text LIKE '%test%'
 WHERE attr("id") LIKE 'test%'
-WHERE width <= "10px"
-WHERE width > "10px" AND width < "15px"
-WHERE width BETWEEN "10px" AND "15px"
-WHERE width IN ("10px", "20px", "30px")
+WHERE rect("width") <= "10px"
+WHERE rect("width") > "10px" AND width < "15px"
+WHERE rect("width") BETWEEN "10px" AND "15px"
+WHERE rect("width") IN ("10px", "20px", "30px")
 ```
 
 ### ORDER BY
 ``` sql
 ORDER BY text
-ORDER BY fontSize DESC
+ORDER BY style("fontSize") DESC
 ```
 
 ### LIMIT
