@@ -4,6 +4,12 @@ import Query from '../../models/query';
 
 export default async function extract(browser: Browser, query: Query): Promise<KeyValue[]> {
   try {
+    if (query.properties.some((property) => property.type === 'preset' && ['markdown'].includes(property.name))) {
+      await browser.addScriptTag('https://unpkg.com/turndown/dist/turndown.js');
+      console.log('BLA');
+      
+    }
+
     const data: KeyValue[] = (await browser.executeScript(async (query: Query) => {
       const selector = query.where && Array.isArray(query.where.selectors) && query.where.selectors.join(', ') || '*';
       let elements: any;
@@ -47,6 +53,12 @@ export default async function extract(browser: Browser, query: Query): Promise<K
                 break;
               case 'links':
                 value = (element as Element).getAttribute('href');
+                break;
+              case 'markdown':
+                const turndownService = new window.TurndownService();
+
+                turndownService.remove(['script', 'style']);
+                value = turndownService.turndown((element as Element).outerHTML);
                 break;
               case 'scripts':
                 value = (element as Element).getAttribute('src');

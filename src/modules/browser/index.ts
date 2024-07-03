@@ -100,6 +100,10 @@ export default class Browser {
     return this.browser!.close();
   }
 
+  addScriptTag(url: string) {
+    return this.page!.addScriptTag({ url, });
+  }
+
   evaluate(
     elementHandles: ElementHandle | Array<ElementHandle>,
     fnc: EvaluateFunc<unknown[]>

@@ -2,6 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 async function extract(browser, query) {
     try {
+        if (query.properties.some((property) => property.type === 'preset' && ['markdown'].includes(property.name))) {
+            await browser.addScriptTag('https://unpkg.com/turndown/dist/turndown.js');
+            console.log('BLA');
+        }
         const data = (await browser.executeScript(async (query) => {
             const selector = query.where && Array.isArray(query.where.selectors) && query.where.selectors.join(', ') || '*';
             let elements;
@@ -43,6 +47,11 @@ async function extract(browser, query) {
                                 break;
                             case 'links':
                                 value = element.getAttribute('href');
+                                break;
+                            case 'markdown':
+                                const turndownService = new window.TurndownService();
+                                turndownService.remove(['script', 'style']);
+                                value = turndownService.turndown(element.outerHTML);
                                 break;
                             case 'scripts':
                                 value = element.getAttribute('src');

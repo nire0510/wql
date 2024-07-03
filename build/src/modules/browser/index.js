@@ -89,6 +89,9 @@ class Browser {
     close() {
         return this.browser.close();
     }
+    addScriptTag(url) {
+        return this.page.addScriptTag({ url, });
+    }
     evaluate(elementHandles, fnc) {
         return this.page.evaluate(fnc, elementHandles);
     }

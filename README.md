@@ -63,6 +63,7 @@ FROM "url"
 ``` sql
 SELECT text,                    -- text content
   html,                         -- outer HTML
+  mardown,                      -- outer HTML as markdown
   tag,                          -- tag name
   data("fullname") AS fullname, -- dataset attribute value
   attr("id") AS id,             -- attribute value
