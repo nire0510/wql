@@ -5,9 +5,7 @@ import Query from '../../models/query';
 export default async function extract(browser: Browser, query: Query): Promise<KeyValue[]> {
   try {
     if (query.properties.some((property) => property.type === 'preset' && ['markdown'].includes(property.name))) {
-      await browser.addScriptTag('https://unpkg.com/turndown/dist/turndown.js');
-      console.log('BLA');
-      
+      await browser.addScriptTag('https://unpkg.com/turndown/dist/turndown.js');      
     }
 
     const data: KeyValue[] = (await browser.executeScript(async (query: Query) => {

@@ -4,7 +4,6 @@ async function extract(browser, query) {
     try {
         if (query.properties.some((property) => property.type === 'preset' && ['markdown'].includes(property.name))) {
             await browser.addScriptTag('https://unpkg.com/turndown/dist/turndown.js');
-            console.log('BLA');
         }
         const data = (await browser.executeScript(async (query) => {
             const selector = query.where && Array.isArray(query.where.selectors) && query.where.selectors.join(', ') || '*';
