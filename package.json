@@ -1,6 +1,6 @@
 {
   "name": "@nire0510/wql",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Query the web with SQL like syntax",
   "main": "build/src/index.js",
   "private": false,
