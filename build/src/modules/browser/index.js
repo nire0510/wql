@@ -102,7 +102,7 @@ class Browser {
         if (selector === null) {
             return this.page.content();
         }
-        return this.page.$$eval(selector, (elements) => elements.map((element) => element.textContent));
+        return this.page.$$eval(selector, (elements) => elements.map((element) => element.innerText));
     }
     getCookies() {
         return this.page.cookies();

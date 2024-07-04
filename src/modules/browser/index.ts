@@ -124,7 +124,7 @@ export default class Browser {
       return this.page!.content();
     }
 
-    return this.page!.$$eval(selector, (elements: Element[]) => elements.map((element: Element) => element.textContent));
+    return this.page!.$$eval(selector, (elements: Element[]) => elements.map((element: any) => element.innerText));
   }
 
   getCookies(): Promise<Cookie[]> {

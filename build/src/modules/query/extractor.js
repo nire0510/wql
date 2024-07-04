@@ -36,7 +36,7 @@ async function extract(browser, query) {
                     case 'preset':
                         switch (property.name) {
                             case 'headers':
-                                value = element.textContent;
+                                value = element.innerText;
                                 break;
                             case 'html':
                                 value = element.outerHTML;
@@ -63,12 +63,12 @@ async function extract(browser, query) {
                                 break;
                             case 'tables':
                                 value = Array.from(element.querySelectorAll('table')).map((table) => {
-                                    const columns = Array.from(table.querySelectorAll('thead th, thead td, tr:first-child > th, tr:first-child > td')).map((th) => th.textContent || '');
+                                    const columns = Array.from(table.querySelectorAll('thead th, thead td, tr:first-child > th, tr:first-child > td')).map((th) => th.innerText || '');
                                     return Array.from(element.querySelectorAll('tr'))
                                         .filter((tr, index) => index > 1 || columns.length === 0)
                                         .map((tr) => Array.from(tr.querySelectorAll('td, th'))
                                         .reduce((row, td, index) => {
-                                        (row[(columns && columns[index]) || `col${index}`] = td.textContent);
+                                        (row[(columns && columns[index]) || `col${index}`] = td.innerText);
                                         return row;
                                     }, {}));
                                 });
@@ -77,7 +77,7 @@ async function extract(browser, query) {
                                 value = element.tagName;
                                 break;
                             case 'text':
-                                value = element.textContent;
+                                value = element.innerText;
                                 break;
                             default:
                                 throw new Error(`Unknown preset property: ${property.name}`);

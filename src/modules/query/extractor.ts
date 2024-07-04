@@ -41,7 +41,7 @@ export default async function extract(browser: Browser, query: Query): Promise<K
           case 'preset':
             switch (property.name) {
               case 'headers':
-                value = (element as Element).textContent;
+                value = (element as HTMLElement).innerText;
                 break;
               case 'html':
                 value = (element as Element).outerHTML;
@@ -69,13 +69,13 @@ export default async function extract(browser: Browser, query: Query): Promise<K
                 break;
               case 'tables':
                 value = Array.from(element.querySelectorAll('table')).map((table: any) => {
-                  const columns = Array.from(table.querySelectorAll('thead th, thead td, tr:first-child > th, tr:first-child > td')).map((th: any) => th.textContent || '');
+                  const columns = Array.from(table.querySelectorAll('thead th, thead td, tr:first-child > th, tr:first-child > td')).map((th: any) => th.innerText || '');
   
                   return Array.from(element.querySelectorAll('tr'))
                     .filter((tr, index) => index > 1 || columns.length === 0)
                     .map((tr: any) => Array.from(tr.querySelectorAll('td, th'))
                         .reduce((row: any, td: any, index) => {
-                          (row[(columns && columns[index]) || `col${index}`] = td.textContent);
+                          (row[(columns && columns[index]) || `col${index}`] = td.innerText);
 
                           return row;
                         }, {}));
@@ -85,7 +85,7 @@ export default async function extract(browser: Browser, query: Query): Promise<K
                 value = (element as Element).tagName;
                 break;
               case 'text':
-                value = (element as Element).textContent;
+                value = (element as HTMLElement).innerText;
                 break;
               default:
                 throw new Error(`Unknown preset property: ${property.name}`);
