@@ -35,6 +35,8 @@ async function extract(browser, query) {
                         break;
                     case 'preset':
                         switch (property.name) {
+                            case 'content':
+                                value = element.textContent;
                             case 'headers':
                                 value = element.innerText;
                                 break;

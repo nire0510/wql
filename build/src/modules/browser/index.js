@@ -98,11 +98,17 @@ class Browser {
     getAttribute(selector, attribute) {
         return this.page.$$eval(selector, (elements, attribute) => elements.map((element) => element.getAttribute(attribute)), attribute);
     }
-    getContent(selector) {
+    getText(selector) {
         if (selector === null) {
             return this.page.content();
         }
         return this.page.$$eval(selector, (elements) => elements.map((element) => element.innerText));
+    }
+    getContent(selector) {
+        if (selector === null) {
+            return this.page.content();
+        }
+        return this.page.$$eval(selector, (elements) => elements.map((element) => element.textContent));
     }
     getCookies() {
         return this.page.cookies();
