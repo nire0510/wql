@@ -6,9 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const getv_1 = __importDefault(require("getv"));
 const puppeteer_extra_1 = __importDefault(require("puppeteer-extra"));
 const puppeteer_extra_plugin_stealth_1 = __importDefault(require("puppeteer-extra-plugin-stealth"));
-const puppeteer_extra_plugin_adblocker_1 = __importDefault(require("puppeteer-extra-plugin-adblocker"));
 puppeteer_extra_1.default.use((0, puppeteer_extra_plugin_stealth_1.default)());
-puppeteer_extra_1.default.use((0, puppeteer_extra_plugin_adblocker_1.default)({ blockTrackers: true }));
+// puppeteer.use(AdblockerPlugin({ blockTrackers: true }))
 class Browser {
     constructor(options) {
         this.initialized = false;
