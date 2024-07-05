@@ -61,7 +61,8 @@ FROM "url"
 
 ### SELECT
 ``` sql
-SELECT text,                    -- text content
+SELECT text,                    -- inner text
+  content,                      -- text content
   html,                         -- outer HTML
   mardown,                      -- outer HTML as markdown
   tag,                          -- tag name

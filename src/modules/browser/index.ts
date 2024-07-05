@@ -119,12 +119,20 @@ export default class Browser {
     );
   }
 
-  getContent(selector: string | null): Promise<Array<string | null> | string | unknown> {
+  getText(selector: string | null): Promise<Array<string | null> | string | unknown> {
     if (selector === null) {
       return this.page!.content();
     }
 
     return this.page!.$$eval(selector, (elements: Element[]) => elements.map((element: any) => element.innerText));
+  }
+
+  getContent(selector: string | null): Promise<Array<string | null> | string | unknown> {
+    if (selector === null) {
+      return this.page!.content();
+    }
+
+    return this.page!.$$eval(selector, (elements: Element[]) => elements.map((element: Element) => element.textContent));
   }
 
   getCookies(): Promise<Cookie[]> {

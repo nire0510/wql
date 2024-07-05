@@ -40,6 +40,8 @@ export default async function extract(browser: Browser, query: Query): Promise<K
             break;
           case 'preset':
             switch (property.name) {
+              case 'content':
+                value = (element as HTMLElement).textContent;
               case 'headers':
                 value = (element as HTMLElement).innerText;
                 break;
