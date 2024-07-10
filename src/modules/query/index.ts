@@ -12,12 +12,12 @@ import Response from '../../models/response';
 import order from './sorter';
 
 export default async function run(query: string, options: Options): Promise<Response[]> {
-  try {
-    const queries: Query[] = parse(query);
-    const responses: Response[] = await Promise.all(
-      queries.map(async (query: Query) => {
-        const start = Date.now();
-        const browser = await load(query.website.url, options);
+  const queries: Query[] = parse(query);
+  const responses: Response[] = await Promise.all(
+    queries.map(async (query: Query) => {
+      const start = Date.now();
+      const browser = await load(query.website.url, options);
+      try {
         const ipAddress = await netUtils.getIpAddress(new URL(query.website.url).hostname);
         const pageDescription = (await browser.getAttribute('head > meta[name="description"]', 'content') || [''])[0];
         const pageModified = await browser.executeScript(() => document.lastModified);
@@ -53,15 +53,17 @@ export default async function run(query: string, options: Options): Promise<Resp
         );
 
         options.screenshot && await browser.screenshot(response.meta.query.screenshot!);
-        await browser.close();
 
         return response;
-      })
-    );
+      }
+      catch (error) {
+        throw new Error(`Unable to run query: ${error}`);
+      }
+      finally {
+        await browser.close();
+      }
+    })
+  );
 
-    return responses;
-  }
-  catch (error) {
-    throw new Error(`Unable to run query: ${error}`);
-  }
+  return responses;
 }

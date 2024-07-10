@@ -38,11 +38,11 @@ const parser_1 = __importDefault(require("./parser"));
 const response_1 = __importDefault(require("../../models/response"));
 const sorter_1 = __importDefault(require("./sorter"));
 async function run(query, options) {
-    try {
-        const queries = (0, parser_1.default)(query);
-        const responses = await Promise.all(queries.map(async (query) => {
-            const start = Date.now();
-            const browser = await (0, loader_1.default)(query.website.url, options);
+    const queries = (0, parser_1.default)(query);
+    const responses = await Promise.all(queries.map(async (query) => {
+        const start = Date.now();
+        const browser = await (0, loader_1.default)(query.website.url, options);
+        try {
             const ipAddress = await netUtils.getIpAddress(new URL(query.website.url).hostname);
             const pageDescription = (await browser.getAttribute('head > meta[name="description"]', 'content') || [''])[0];
             const pageModified = await browser.executeScript(() => document.lastModified);
@@ -69,13 +69,15 @@ async function run(query, options) {
                 duration: Math.round((Date.now() - start) / 1000),
             }, dataFinal);
             options.screenshot && await browser.screenshot(response.meta.query.screenshot);
-            await browser.close();
             return response;
-        }));
-        return responses;
-    }
-    catch (error) {
-        throw new Error(`Unable to run query: ${error}`);
-    }
+        }
+        catch (error) {
+            throw new Error(`Unable to run query: ${error}`);
+        }
+        finally {
+            await browser.close();
+        }
+    }));
+    return responses;
 }
 exports.default = run;
